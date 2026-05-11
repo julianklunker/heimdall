@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nebula | Architecting the Future of Compute</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&amp;family=Geist+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #121414;
+            color: #e3e2e2;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .orange-glow {
+            box-shadow: 0 0 20px rgba(255, 87, 34, 0.3);
+        }
+        .star-field {
+            background-image: 
+                radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 50px 160px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 80px 120px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 110px 210px, #ffffff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            opacity: 0.2;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#ffdad6",
+                        "surface-container-high": "#292a2a",
+                        "surface-container-low": "#1b1c1c",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "tertiary-fixed": "#e5e2e1",
+                        "on-primary-fixed": "#1a1c1c",
+                        "primary-fixed": "#e2e2e2",
+                        "on-surface": "#e3e2e2",
+                        "background": "#121414",
+                        "on-secondary": "#5f1500",
+                        "on-primary-container": "#636565",
+                        "secondary-fixed-dim": "#ffb5a0",
+                        "surface-container-lowest": "#0d0e0f",
+                        "surface-tint": "#c6c6c7",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "inverse-surface": "#e3e2e2",
+                        "outline-variant": "#444748",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "error": "#ffb4ab",
+                        "secondary-container": "#d73b00",
+                        "on-primary-fixed-variant": "#454747",
+                        "surface-bright": "#383939",
+                        "primary-container": "#e2e2e2",
+                        "secondary-fixed": "#ffdbd1",
+                        "surface-dim": "#121414",
+                        "on-tertiary": "#313030",
+                        "surface-container-highest": "#343535",
+                        "on-background": "#e3e2e2",
+                        "on-secondary-fixed-variant": "#862200",
+                        "on-secondary-container": "#fffbff",
+                        "outline": "#8e9192",
+                        "surface": "#121414",
+                        "secondary": "#ffb5a0",
+                        "on-tertiary-container": "#656464",
+                        "error-container": "#93000a",
+                        "on-surface-variant": "#c4c7c8",
+                        "surface-variant": "#343535",
+                        "primary": "#ffffff",
+                        "on-primary": "#2f3131",
+                        "inverse-on-surface": "#303031",
+                        "tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#474646",
+                        "tertiary-container": "#e5e2e1",
+                        "on-error": "#690005",
+                        "inverse-primary": "#5d5f5f",
+                        "surface-container": "#1f2020",
+                        "on-secondary-fixed": "#3b0900"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "48px",
+                        "xl": "80px",
+                        "xs": "8px",
+                        "base": "4px",
+                        "sm": "16px",
+                        "gutter": "24px",
+                        "md": "24px",
+                        "margin": "40px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Geist Sans"],
+                        "mono-label": ["JetBrains Mono"],
+                        "headline-lg": ["Geist Sans"],
+                        "mono-code": ["JetBrains Mono"],
+                        "body-lg": ["Geist Sans"],
+                        "headline-md": ["Geist Sans"],
+                        "display-xl": ["Geist Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "mono-label": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "mono-code": ["13px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                        "display-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-body-md text-body-md bg-background selection:bg-secondary-container selection:text-white">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-20px border-b border-white/10">
+<div class="flex justify-between items-center w-full px-gutter h-[80px] max-w-[1200px] mx-auto">
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md font-bold tracking-tighter text-primary dark:text-primary">Nebula</span>
+<div class="hidden md:flex gap-sm items-center ml-lg">
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors duration-300" href="#">Network</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors duration-300" href="#">Compute</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors duration-300" href="#">Storage</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors duration-300" href="#">Docs</a>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<div class="hidden md:flex items-center gap-xs mr-sm">
+<button class="p-xs text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+<button class="text-on-surface-variant font-body-md hover:text-primary transition-colors duration-300 px-sm">Login</button>
+<button class="bg-secondary-container text-white px-gutter py-xs font-bold rounded-lg orange-glow active:scale-95 transition-transform duration-200">Launch Terminal</button>
+</div>
+</div>
+</nav>
+<main class="relative">
+<!-- Background Shader Simulation -->
+<div class="fixed inset-0 z-0 pointer-events-none">
+<div class="absolute inset-0 bg-gradient-to-br from-background via-surface-container-lowest to-background opacity-90"></div>
+<div class="absolute inset-0 star-field"></div>
+<div class="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-[#FF5722]/5 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-secondary-container/5 rounded-full blur-[120px]"></div>
+</div>
+<!-- Hero Section -->
+<section class="relative z-10 pt-[160px] pb-xl px-gutter max-w-[1200px] mx-auto flex flex-col items-start min-h-[819px] justify-center">
+<div class="inline-flex items-center gap-xs px-sm py-xs bg-white/5 border border-white/10 rounded-full mb-md">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+<span class="font-mono-label text-[10px] uppercase tracking-widest text-secondary">System Status: Operational [0.05ms]</span>
+</div>
+<h1 class="font-display-xl text-display-xl max-w-[800px] mb-lg text-primary leading-tight">
+                Architecting the Future of <span class="text-secondary">Compute</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-[600px] mb-lg">
+                High-performance distributed systems for the next generation of technical innovation. Secure, scalable, and built for speed at the edge of the universe.
+            </p>
+<div class="flex flex-wrap gap-md">
+<button class="bg-[#FF5722] text-on-secondary px-[40px] py-[16px] font-bold text-body-md rounded-lg orange-glow hover:opacity-90 transition-all flex items-center gap-sm">
+                    Deploy Now
+                    <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="border border-white/20 text-primary px-[40px] py-[16px] font-medium text-body-md rounded-lg hover:bg-white/5 transition-all">
+                    View Benchmarks
+                </button>
+</div>
+<!-- Terminal Preview Overlay -->
+<div class="mt-xl w-full glass-card rounded-xl p-base overflow-hidden border border-white/10">
+<div class="bg-surface-container-lowest/50 p-sm border-b border-white/10 flex items-center justify-between">
+<div class="flex gap-xs">
+<div class="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
+</div>
+<span class="font-mono-label text-[11px] text-on-surface-variant uppercase tracking-tighter">nebula-cli — v0.42.0</span>
+<div class="w-12"></div>
+</div>
+<div class="p-lg font-mono-code text-mono-code text-on-surface/80 leading-relaxed bg-black/40">
+<div class="flex gap-sm mb-xs"><span class="text-secondary">$</span> nebula init --project future-compute</div>
+<div class="flex gap-sm mb-xs"><span class="text-on-surface-variant opacity-50">00:01</span> <span class="text-green-400">SUCCESS</span> Initializing cluster orchestration...</div>
+<div class="flex gap-sm mb-xs"><span class="text-on-surface-variant opacity-50">00:03</span> <span class="text-green-400">SUCCESS</span> Low-latency edge nodes discovered [14,022 active]</div>
+<div class="flex gap-sm mb-xs"><span class="text-on-surface-variant opacity-50">00:04</span> <span class="text-green-400">SUCCESS</span> Infinite scale protocol established</div>
+<div class="flex gap-sm mt-sm"><span class="text-secondary">$</span> nebula deploy <span class="animate-pulse">_</span></div>
+</div>
+</div>
+</section>
+<!-- Value Proposition Section -->
+<section class="relative z-10 py-xl px-gutter max-w-[1200px] mx-auto">
+<div class="text-left mb-xl">
+<h2 class="font-mono-label text-mono-label text-secondary uppercase tracking-[0.3em] mb-sm">Infrastructure Core</h2>
+<div class="h-px w-24 bg-secondary mb-md"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<!-- Column 1: Low Latency -->
+<div class="group relative">
+<div class="absolute -inset-2 bg-gradient-to-b from-secondary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity blur-xl"></div>
+<div class="relative glass-card p-xl flex flex-col items-start gap-md h-full">
+<div class="w-12 h-12 bg-white/5 border border-white/10 rounded flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary">Low Latency</h3>
+<p class="text-on-surface-variant">Global routing optimized at the hardware level. We bypass standard internet congestion using proprietary dark fiber clusters.</p>
+<div class="mt-auto pt-md flex items-center gap-xs font-mono-label text-[12px] text-secondary/60">
+<span class="w-1 h-1 bg-secondary rounded-full"></span>
+                            AVERAGE 0.05MS RESPONSE
+                        </div>
+</div>
+</div>
+<!-- Column 2: Edge Optimization -->
+<div class="group relative">
+<div class="absolute -inset-2 bg-gradient-to-b from-secondary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity blur-xl"></div>
+<div class="relative glass-card p-xl flex flex-col items-start gap-md h-full">
+<div class="w-12 h-12 bg-white/5 border border-white/10 rounded flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="hub">hub</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary">Edge Optimization</h3>
+<p class="text-on-surface-variant">Compute cycles executed directly at the edge node nearest to your end-user, reducing hops and maximizing throughput.</p>
+<div class="mt-auto pt-md flex items-center gap-xs font-mono-label text-[12px] text-secondary/60">
+<span class="w-1 h-1 bg-secondary rounded-full"></span>
+                            340+ GLOBAL POPs
+                        </div>
+</div>
+</div>
+<!-- Column 3: Infinite Scale -->
+<div class="group relative">
+<div class="absolute -inset-2 bg-gradient-to-b from-secondary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity blur-xl"></div>
+<div class="relative glass-card p-xl flex flex-col items-start gap-md h-full">
+<div class="w-12 h-12 bg-white/5 border border-white/10 rounded flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="all_inclusive">all_inclusive</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary">Infinite Scale</h3>
+<p class="text-on-surface-variant">Autonomous resource allocation. Your infrastructure expands and contracts based on real-time demand without manual intervention.</p>
+<div class="mt-auto pt-md flex items-center gap-xs font-mono-label text-[12px] text-secondary/60">
+<span class="w-1 h-1 bg-secondary rounded-full"></span>
+                            ZERO PROVISIONING
+                        </div>
+</div>
+</div>
+</div>
+</section>
+<!-- Technical Visual Breakdown (Bento Grid Style) -->
+<section class="relative z-10 py-xl px-gutter max-w-[1200px] mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-md h-auto md:h-[600px]">
+<div class="md:col-span-2 md:row-span-2 glass-card rounded-lg relative overflow-hidden group">
+<img class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-40 group-hover:scale-105 transition-transform duration-700" data-alt="A macro cinematic shot of a futuristic server processor glowing with intense orange light and intricate circuit patterns. The environment is a dark, high-tech server room with reflective glass surfaces and a deep space aesthetic. The lighting is moody and technical, emphasizing precision engineering and advanced digital power." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgnZ0ylXZSGZhpscM6BUV_QPR37TN8j2-lYZhVex_mEm69wFE5K5AYWQYnxcLACr2ZozWHyf3uUr3rXx_VHZA-7Rml0hXrC-5-kZ2wzNd5moj8pBPe59lspxZ2Y5wAzSZmojYsEXDkFk_BWAIdIGLB8ajm6QtYfmZ9VDPYj6eIQYtxm_TabaZlv27vvbXrgHp48w71f-ER_fkFHZ_Tzbkrj7UJzFR6-WCGLSIDVQDc_wv9uVQbAt8Xtvt_U2pj2HZ7zY5hCt-Mjkj8"/>
+<div class="relative p-lg h-full flex flex-col justify-end bg-gradient-to-t from-background via-transparent to-transparent">
+<span class="font-mono-label text-secondary mb-xs">CORE_ARCHITECTURE</span>
+<h4 class="font-headline-lg text-headline-lg text-primary mb-md">Quantum-Ready Fabric</h4>
+<p class="text-on-surface-variant max-w-[400px]">Our underlying mesh network utilizes quantum-resistant encryption at the transport layer, ensuring data integrity across all nodes.</p>
+</div>
+</div>
+<div class="md:col-span-2 glass-card rounded-lg p-lg flex flex-col justify-between border border-white/5">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-mono-label text-secondary/60 block mb-xs">TRAFFIC_LOAD</span>
+<h4 class="font-headline-md text-headline-md text-primary">Global Distribution</h4>
+</div>
+<span class="material-symbols-outlined text-secondary" data-icon="language">language</span>
+</div>
+<div class="flex items-end gap-base h-24 mt-lg">
+<div class="flex-1 bg-secondary/10 h-8 rounded-sm"></div>
+<div class="flex-1 bg-secondary/20 h-16 rounded-sm"></div>
+<div class="flex-1 bg-secondary/10 h-12 rounded-sm"></div>
+<div class="flex-1 bg-secondary/30 h-20 rounded-sm"></div>
+<div class="flex-1 bg-[#FF5722] h-full rounded-sm orange-glow"></div>
+<div class="flex-1 bg-secondary/20 h-14 rounded-sm"></div>
+<div class="flex-1 bg-secondary/10 h-10 rounded-sm"></div>
+</div>
+</div>
+<div class="md:col-span-1 glass-card rounded-lg p-lg flex flex-col justify-center items-center text-center">
+<span class="font-display-xl text-[48px] text-primary mb-xs">99.99</span>
+<span class="font-mono-label text-secondary text-[10px] tracking-widest uppercase">Percent Uptime</span>
+</div>
+<div class="md:col-span-1 glass-card rounded-lg p-lg flex flex-col justify-center items-center text-center bg-[#FF5722]/5 border-secondary/20">
+<span class="font-display-xl text-[48px] text-[#FF5722] mb-xs">0.05</span>
+<span class="font-mono-label text-secondary text-[10px] tracking-widest uppercase">MS Latency</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-surface-container-lowest border-t border-white/5">
+<div class="w-full px-gutter py-xl max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-md">
+<div class="flex flex-col items-center md:items-start gap-xs">
+<span class="font-mono-label text-mono-label font-black text-primary">NEBULA SYSTEMS</span>
+<span class="font-mono-label text-mono-label uppercase tracking-widest text-secondary text-[10px]">
+                    © 2024 Nebula Systems. All Systems Operational [0.05ms]
+                </span>
+</div>
+<div class="flex gap-lg flex-wrap justify-center">
+<a class="font-mono-label text-mono-label uppercase tracking-widest text-on-surface-variant hover:text-secondary transition-colors" href="#">Security</a>
+<a class="font-mono-label text-mono-label uppercase tracking-widest text-on-surface-variant hover:text-secondary transition-colors" href="#">Changelog</a>
+<a class="font-mono-label text-mono-label uppercase tracking-widest text-on-surface-variant hover:text-secondary transition-colors" href="#">API Reference</a>
+<a class="font-mono-label text-mono-label uppercase tracking-widest text-on-surface-variant hover:text-secondary transition-colors" href="#">Status</a>
+</div>
+<div class="flex gap-md">
+<span class="material-symbols-outlined opacity-80 hover:opacity-100 text-on-surface-variant cursor-pointer transition-opacity" data-icon="terminal">terminal</span>
+<span class="material-symbols-outlined opacity-80 hover:opacity-100 text-on-surface-variant cursor-pointer transition-opacity" data-icon="code">code</span>
+</div>
+</div>
+</footer>
+</body></html>

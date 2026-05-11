@@ -1,0 +1,70 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@fontsource-variable/geist";
+@import "@fontsource/jetbrains-mono";
+
+@theme {
+  --font-geist: 'Geist Variable', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+:root {
+  color-scheme: dark;
+
+  /* Nebula surface palette */
+  --surface: #121414;
+  --surface-low: #1b1c1c;
+  --surface-high: #292a2a;
+  --on-surface: #e3e2e2;
+  --on-surface-variant: #c4c7c8;
+  --outline: #8e9192;
+  --outline-variant: #444748;
+
+  /* Signature accent */
+  --accent: #FF5722;
+  --accent-dim: #cc3300;
+
+  /* Design tokens */
+  --background: #000000;
+  --foreground: #e3e2e2;
+  --border: oklch(1 0 0 / 0.1);
+  --radius: 0.5rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #000000;
+  color: #e3e2e2;
+  font-family: 'Geist Variable', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+@keyframes rainbowGlow {
+  0%   { text-shadow: 0 0 8px rgba(255, 87,  34,  0.55); }
+  16%  { text-shadow: 0 0 8px rgba(255, 210,  0,  0.55); }
+  33%  { text-shadow: 0 0 8px rgba(50,  220, 100, 0.55); }
+  50%  { text-shadow: 0 0 8px rgba(0,   190, 255, 0.55); }
+  66%  { text-shadow: 0 0 8px rgba(130,  80, 255, 0.55); }
+  83%  { text-shadow: 0 0 8px rgba(255,  60, 130, 0.55); }
+  100% { text-shadow: 0 0 8px rgba(255, 87,  34,  0.55); }
+}
+
+.rainbow-glow {
+  animation: rainbowGlow 6s linear infinite;
+}
