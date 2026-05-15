@@ -21,9 +21,9 @@ export default function Navbar() {
           className="text-white font-bold text-lg tracking-wider"
           style={{ fontFamily: "'Geist Variable', sans-serif" }}
         >
-          HEIMDALL
+          JULIAN'S
         </span>
-        <span className="text-[#8e9192] text-sm font-light tracking-widest">DESIGNS</span>
+        <span className="text-[#8e9192] text-sm font-light tracking-widest">WEB SERVICE</span>
       </Link>
 
       <div className="hidden md:flex items-center gap-8">

@@ -1,6 +1,11 @@
 import { Share2 } from "lucide-react"
 import { useLanguage } from "@/lib/LanguageContext"
 
+const techStack = [
+  "React", "TypeScript", "Next.js", "Tailwind CSS",
+  "Node.js", "Python", "Supabase", "Vite", "Framer Motion", "AI APIs",
+]
+
 export default function About() {
   const { t } = useLanguage()
 
@@ -26,9 +31,30 @@ export default function About() {
             <p className="text-[#8e9192] text-lg leading-relaxed mb-6">
               {t("about.p1")}
             </p>
-            <p className="text-[#8e9192] leading-relaxed mb-10">
+            <p className="text-[#8e9192] leading-relaxed mb-8">
               {t("about.p2")}
             </p>
+
+            {/* Tech stack */}
+            <div className="mb-10">
+              <p
+                className="text-[10px] text-[#FF5722] uppercase tracking-[0.3em] mb-3"
+                style={{ fontFamily: "'JetBrains Mono', monospace" }}
+              >
+                {t("about.tech")}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {techStack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-2.5 py-1 text-[11px] text-[#8e9192] border border-white/[0.08] rounded bg-white/[0.03] uppercase tracking-wider"
+                    style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
 
             <a
               href="https://www.linkedin.com/in/julian-zachar-fink-5574672b9/"
@@ -66,10 +92,27 @@ export default function About() {
             <div className="relative rounded-lg overflow-hidden border border-white/[0.08]">
               <img
                 src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80"
-                alt="Developer workspace"
+                alt="Developer workspace with monitor displaying code"
+                width={800}
+                height={500}
+                loading="lazy"
                 className="w-full h-[500px] object-cover transition-all duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent pointer-events-none" />
+
+              {/* Floating info card */}
+              <div className="absolute bottom-6 left-6 right-6 p-4 bg-black/70 backdrop-blur-md border border-white/[0.08] rounded-lg">
+                <p
+                  className="text-[10px] text-[#FF5722] uppercase tracking-[0.3em] mb-1"
+                  style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                >
+                  Available for new projects
+                </p>
+                <p className="text-white text-sm font-medium" style={{ fontFamily: "'Geist Variable', sans-serif" }}>
+                  Julian Zachar-Fink — Copenhagen, Denmark
+                </p>
+                <p className="text-[#8e9192] text-xs mt-0.5">CVR: 43486489</p>
+              </div>
             </div>
           </div>
         </div>

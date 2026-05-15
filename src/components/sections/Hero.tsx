@@ -20,15 +20,15 @@ export default function Hero() {
         </p>
 
         <h1
-          className="text-[clamp(4rem,14vw,9rem)] font-bold text-white leading-none tracking-[-0.04em]"
+          className="text-[clamp(3rem,11vw,7.5rem)] font-bold text-white leading-none tracking-[-0.04em]"
           style={{ fontFamily: "'Geist Variable', sans-serif" }}
         >
-          HEIMDALL
+          JULIAN'S
           <span
-            className="block text-[clamp(1.5rem,5vw,4rem)] font-light text-[#8e9192] tracking-[0.5em] mt-2"
+            className="block text-[clamp(1.5rem,5vw,4rem)] font-light text-[#8e9192] tracking-[0.3em] mt-2"
             style={{ fontFamily: "'Geist Variable', sans-serif" }}
           >
-            DESIGNS
+            WEB SERVICE
           </span>
         </h1>
 

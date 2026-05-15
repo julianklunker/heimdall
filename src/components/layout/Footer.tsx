@@ -1,4 +1,4 @@
-import { AtSign, Code2, Share2 } from "lucide-react"
+import { AtSign, Share2 } from "lucide-react"
 import { Link } from "react-router-dom"
 import { useLanguage } from "@/lib/LanguageContext"
 
@@ -14,9 +14,9 @@ export default function Footer() {
               className="text-white font-bold text-base tracking-wider"
               style={{ fontFamily: "'Geist Variable', sans-serif" }}
             >
-              HEIMDALL
+              JULIAN'S
             </span>
-            <span className="text-[#8e9192] text-xs font-light tracking-widest">DESIGNS</span>
+            <span className="text-[#8e9192] text-xs font-light tracking-widest">WEB SERVICE</span>
           </div>
 
           <div className="flex flex-col items-center gap-1">
@@ -30,7 +30,11 @@ export default function Footer() {
           </div>
 
           <div className="flex items-center gap-4">
-            <a href="#" aria-label="X / Twitter" className="text-[#8e9192] hover:text-[#FF5722] transition-colors">
+            <a
+              href="mailto:julianzacharfink@gmail.com"
+              aria-label="Email Julian"
+              className="text-[#8e9192] hover:text-[#FF5722] transition-colors"
+            >
               <AtSign size={16} />
             </a>
             <a
@@ -41,9 +45,6 @@ export default function Footer() {
               className="text-[#8e9192] hover:text-[#FF5722] transition-colors"
             >
               <Share2 size={16} />
-            </a>
-            <a href="#" aria-label="GitHub" className="text-[#8e9192] hover:text-[#FF5722] transition-colors">
-              <Code2 size={16} />
             </a>
           </div>
         </div>
