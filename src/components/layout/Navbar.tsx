@@ -1,17 +1,30 @@
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { cn } from "@/lib/utils"
 import { useLanguage } from "@/lib/LanguageContext"
 import type { Lang } from "@/lib/translations"
 
 export default function Navbar() {
   const location = useLocation()
+  const navigate = useNavigate()
   const { lang, setLang, t } = useLanguage()
 
+  function handleHashLink(e: React.MouseEvent, hash: string) {
+    e.preventDefault()
+    if (location.pathname === "/") {
+      document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" })
+    } else {
+      navigate("/")
+      setTimeout(() => {
+        document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" })
+      }, 100)
+    }
+  }
+
   const navLinks = [
-    { label: t("nav.aiAgents"), to: "/ai-agents" },
-    { label: t("nav.websites"), to: "/websites" },
-    { label: t("nav.about"), to: "/#about" },
-    { label: t("nav.contact"), to: "/#contact" },
+    { label: t("nav.aiAgents"), to: "/ai-agents", hash: null },
+    { label: t("nav.websites"), to: "/websites", hash: null },
+    { label: t("nav.about"), to: "/#about", hash: "#about" },
+    { label: t("nav.contact"), to: "/#contact", hash: "#contact" },
   ]
 
   return (
@@ -29,18 +42,32 @@ export default function Navbar() {
       <div className="hidden md:flex items-center gap-8">
         {navLinks.map((link) => {
           const isActive =
-            link.to.startsWith("/") &&
-            !link.to.includes("#") &&
+            !link.hash &&
             location.pathname === link.to
+
+          const className = cn(
+            "text-sm tracking-wide transition-colors duration-200 rainbow-glow",
+            isActive ? "text-[#FF5722]" : "text-[#8e9192] hover:text-white"
+          )
+
+          if (link.hash) {
+            return (
+              <a
+                key={link.label}
+                href={link.to}
+                onClick={(e) => handleHashLink(e, link.hash!)}
+                className={className}
+              >
+                {link.label}
+              </a>
+            )
+          }
 
           return (
             <Link
               key={link.label}
               to={link.to}
-              className={cn(
-                "text-sm tracking-wide transition-colors duration-200 rainbow-glow",
-                isActive ? "text-[#FF5722]" : "text-[#8e9192] hover:text-white"
-              )}
+              className={className}
             >
               {link.label}
             </Link>
